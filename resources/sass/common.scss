@@ -1,0 +1,97 @@
+// Fonts
+@import url('https://fonts.googleapis.com/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+img{
+    max-width: 100%;
+}
+.top-nav{
+    ul.menu-top{
+        width: 100%;
+        text-align: right;
+        li{
+            list-style: none;
+            display: inline-block;
+            padding: 10px 8px;
+            a{
+                color: #000;
+                text-decoration: none;
+                text-transform: uppercase;
+                font-weight: bold;
+            }
+        }
+    }
+}
+
+.carousel{
+    img{
+        width: 100%;
+    }
+}
+
+.box-title{
+    width: 100%;
+    margin: 25px auto;
+    text-align: center;
+    border-bottom: 1px solid #dcdcdc;
+    h3{
+        font-size: 18px;
+        font-weight: bold;
+        text-transform: uppercase;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 28%;
+        background: #fff;
+        width: fit-content;
+        margin: auto;
+    }
+}
+
+.product-item{
+    p{
+        margin: 5px 0px;
+    }
+}
+
+.item-new{
+    a{
+        color: #000;
+        text-decoration: none;
+    }
+    img{
+        width: 100%;
+    }
+    &.small{
+        a{
+            display: grid;
+            grid-template-columns: 45% 55%;
+            p{
+                padding-left: 5px;
+            }
+        }
+    }
+}
+.footer{
+    background: #F5F5F5;
+    h4{
+        font-size: 16px;
+        text-transform: uppercase;
+    }
+    ul{
+        padding: 0px;
+        margin: 0px;
+        li{
+            list-style: none;
+        }
+    }
+    .copyright{
+        background: #434343;
+        color: #fff;
+    }
+}
