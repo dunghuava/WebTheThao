@@ -37340,8 +37340,8 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\WebBanDoTheThao\resources\js\common.js */"./resources/js/common.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\WebBanDoTheThao\resources\sass\common.scss */"./resources/sass/common.scss");
+__webpack_require__(/*! C:\xampp\htdocs\WebTheThao\resources\js\common.js */"./resources/js/common.js");
+module.exports = __webpack_require__(/*! C:\xampp\htdocs\WebTheThao\resources\sass\common.scss */"./resources/sass/common.scss");
 
 
 /***/ })
