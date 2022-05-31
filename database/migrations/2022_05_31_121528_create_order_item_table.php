@@ -18,12 +18,13 @@ class CreateOrderItemTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('order_id')->default(0)->unsigned();
-            $table->tinyInteger('product_id')->default(0)->unsigned();
+            $table->integer('product_id')->default(0)->unsigned();
             $table->decimal('price')->default(0);
             $table->tinyInteger('quanity')->default(0);
             $table->decimal('amount')->default(0);
             $table->timestamps();
             $table->foreign('order_id')->references('id')->on('order')->onDelete('cascade');
+            $table->foreign('product_id')->references('id')->on('product')->onDelete('cascade');
         });
     }
 
