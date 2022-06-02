@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 
-class DashboardController extends Controller
+class CartController extends Controller
 {
     public function index()
     {
-        return view('admin.dasboard');
+        return view('web.cart');
     }
 }

@@ -1,81 +1,105 @@
-<nav class="top-nav pt-4 pb-2">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3">
-                <a href="/">
-                    <img height="80px" src="/images/logo.png"/>
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a href="index3.html" class="brand-link text-center">
+      <span class="brand-text font-weight-light">AdminLTE 3</span>
+    </a>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        @php
+            $currentRouteName = Route::currentRouteName();
+        @endphp
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-item {{ strpos($currentRouteName,'admin.category') !== false ? 'menu-is-opening menu-open':'' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Danh mục
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.category.list') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách</p>
                 </a>
-            </div>
-            <div class="col-lg-9">
-                <div class="row top-search">
-                    <div class="col-lg-8">
-                        <form class="form-group form-inline">
-                            <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Tìm kiếm....">
-                                <div class="input-group-append">
-                                    <button class="btn btn-success" type="submit">Tìm</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="col-lg-4 text-right">
-                        <a href="/gio-hang" class="btn btn-danger">Giỏ hàng (0)</a>
-                    </div>
-                </div>
-                <ul class="menu-top mb-0">
-                    <li>
-                        <a href="/">Trang chủ</a>
-                    </li>
-                    <li>
-                        <a href="/danh-muc/trang-phuc-the-thao">Trang phục thể thao</a>
-                    </li>
-                    <li>
-                        <a href="/danh-muc/thiet-bi-tap">Thiết bị tập</a>
-                    </li>
-                    <li>
-                        <a href="/danh-muc/tnis">Tenis</a>
-                    </li>
-                    <li>
-                        <a href="/danh-muc/gold">Gold</a>
-                    </li>
-                    <li>
-                        <a href="/danh-muc/bong-da">Bóng đá</a>
-                    </li>
-                    <li>
-                        <a href="/danh-muc/tin-tuc">Tin tức</a>
-                    </li>
-                    <li>
-                        <a href="/danh-muc/lien-he">Liên hệ</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </div>
-</nav>
-<section id="carousel" class="carousel slide mb-2" data-ride="carousel">
-    <!-- Indicators -->
-    <ul class="carousel-indicators">
-        <li data-target="#carousel" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel" data-slide-to="1"></li>
-        <li data-target="#carousel" data-slide-to="2"></li>
-    </ul>
-    <!-- The slideshow -->
-    <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="/images/banner.png" width="100%" height="500">
-        </div>
-        <div class="carousel-item">
-            <img src="/images/banner.png" width="100%" height="500">
-        </div>
-        <div class="carousel-item">
-            <img src="/images/banner.png" width="100%" height="500">
-        </div>
-    </div>
-    <!-- Left and right controls -->
-    <a class="carousel-control-prev" href="#carousel" data-slide="prev">
-        <span class="carousel-control-prev-icon"></span>
-    </a>
-    <a class="carousel-control-next" href="#carousel" data-slide="next">
-        <span class="carousel-control-next-icon"></span>
-    </a>
-</section>
+              </li>
+             <li class="nav-item">
+                <a href="{{ route('admin.category.add') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Thêm mới</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item {{ strpos($currentRouteName,'admin.product') !== false ? 'menu-is-opening menu-open':'' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Sản phẩm
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.product.list') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách</p>
+                </a>
+              </li>
+             <li class="nav-item">
+                <a href="{{ route('admin.product.add') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Thêm mới</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        <li class="nav-item {{ strpos($currentRouteName,'admin.post') !== false ? 'menu-is-opening menu-open':'' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Bài viết
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.post.list') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách</p>
+                </a>
+              </li>
+             <li class="nav-item">
+                <a href="{{ route('admin.post.add') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Thêm mới</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        <li class="nav-item {{ strpos($currentRouteName,'admin.order') !== false ? 'menu-is-opening menu-open':'' }}">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-table"></i>
+              <p>
+                Đơn đặt hàng
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ route('admin.category.list') }}" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Danh sách</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <!-- /.sidebar-menu -->
+    </div></div></div><div class="os-scrollbar os-scrollbar-horizontal os-scrollbar-unusable os-scrollbar-auto-hidden"><div class="os-scrollbar-track"><div class="os-scrollbar-handle" style="width: 100%; transform: translate(0px, 0px);"></div></div></div><div class="os-scrollbar os-scrollbar-vertical os-scrollbar-auto-hidden os-scrollbar-unusable"><div class="os-scrollbar-track"><div class="os-scrollbar-handle" style="height: 100%; transform: translate(0px, 0px);"></div></div></div><div class="os-scrollbar-corner"></div></div>
+    <!-- /.sidebar -->
+  </aside>

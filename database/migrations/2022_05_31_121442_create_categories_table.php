@@ -22,7 +22,7 @@ class CreateCategoriesTable extends Migration
             $table->tinyInteger('parent_id')->default(0);
             $table->tinyInteger('status')->default(0)->comment('0. hide 1. active');
             $table->tinyInteger('menu_top')->default(0);
-            $table->tinyInteger('tyle')->default(0)->comment('0. post 1. product 2. single page 3. about');
+            $table->tinyInteger('type')->default(0)->comment('0. post 1. product 2. single page 3. about');
             $table->timestamps();
         });
     }

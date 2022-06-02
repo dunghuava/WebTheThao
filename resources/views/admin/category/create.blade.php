@@ -2,10 +2,64 @@
 @section('title','page')
 
 @section('content')
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
-
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Thêm / Sửa danh mục</h3>
+              </div>
+              <form method="POST" action="{{ route('admin.category.store') }}">
+                @csrf
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Tên danh mục</label>
+                        <input value="{{ $item->name ?? '' }}" name="name" type="text" class="form-control">
+                        @if(isset($item))
+                            <input name="id" type="hidden" value="{{ $item->id }}"/>
+                        @endif
+                    </div>
+                    <div class="form-group">
+                        <label>Đường dẫn</label>
+                        <input value="{{ $item->slug_link ?? '' }}" name="slug" type="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label>Loại danh mục</label>
+                        <select name="type" class="form-control">
+                            <option value="0">Bài viết</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Thuộc danh mục</label>
+                        <select name="parent_id" class="form-control">
+                            <option value="0">--- Danh mục chính ---</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Trạng thái</label>
+                        <select name="status" class="form-control">
+                            <option value="1">Kích hoạt</option>
+                            <option value="0">Không kích hoạt</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Đặt làm menu top</label>
+                        <select name="menu_top" class="form-control">
+                            <option value="1">Có</option>
+                            <option value="0">Không</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Sắp xếp</label>
+                        <input value="{{ $item->order_index ?? 0 }}" name="order_index" type="number" style="width: auto;" class="form-control">
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <a href="{{ route('admin.category.list') }}" class="btn btn-danger">Hủy bỏ</a>
+                    <button type="submit" class="btn btn-primary">Lưu lại</button>
+                </div>
+              </form>
+            </div>
             </div>
         </div>
     </div>

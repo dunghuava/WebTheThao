@@ -23,6 +23,8 @@ class CreateProductTable extends Migration
             $table->tinyInteger('order_index')->default(0);
             $table->decimal('price')->default(0);
             $table->tinyInteger('status')->default(0)->comment('0. hide 1. active');
+            $table->string('desc')->nullable();
+            $table->text('content')->nullable();
             $table->timestamps();
             $table->foreign('category_id')->references('id')->on('categories');
         });

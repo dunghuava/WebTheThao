@@ -8,11 +8,20 @@
     <link rel="stylesheet" href="{{mix('css/common.css')}}">
     <title>@yield('title')</title>
 </head>
-<body>
-    @include('admin.sidebar')
-    @include('admin.navigation')
-        @yield('content')
-    @include('footer')
+<body class="sidebar-mini layout-fixed">
+    <div class="wrapper">
+        @include('admin.navigation')
+        @include('admin.sidebar')
+        <div class="content-wrapper pt-4">
+            @yield('content')
+        </div>
+    </div>
     <script src="{{mix('js/common.js')}}"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/34.1.0/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor.create( document.querySelector( '.editor' ) ).catch( error => {
+            console.error( error );
+        });
+    </script>
 </body>
 </html>
