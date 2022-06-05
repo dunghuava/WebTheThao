@@ -1,3 +1,11 @@
+@php
+    $navigation = App\Category::where([
+        'menu_top'=>1,
+        'status'=>1,
+        'parent_id'=>0
+    ])->get();
+@endphp
+
 <nav class="top-nav pt-4 pb-2">
     <div class="container">
         <div class="row">
@@ -19,57 +27,47 @@
                         </form>
                     </div>
                     <div class="col-lg-4 text-right">
-                        <a href="/gio-hang" class="btn btn-danger">Giỏ hàng (0)</a>
+                        @php
+                            $cart = new App\Http\Controllers\Cart;
+                        @endphp
+                        <a href="/gio-hang" class="btn btn-danger">Giỏ hàng ({{ $cart->count() }})</a>
                     </div>
                 </div>
                 <ul class="menu-top mb-0">
                     <li>
                         <a href="/">Trang chủ</a>
                     </li>
-                    <li>
-                        <a href="/danh-muc/trang-phuc-the-thao">Trang phục thể thao</a>
-                    </li>
-                    <li>
-                        <a href="/danh-muc/thiet-bi-tap">Thiết bị tập</a>
-                    </li>
-                    <li>
-                        <a href="/danh-muc/tnis">Tenis</a>
-                    </li>
-                    <li>
-                        <a href="/danh-muc/gold">Gold</a>
-                    </li>
-                    <li>
-                        <a href="/danh-muc/bong-da">Bóng đá</a>
-                    </li>
-                    <li>
-                        <a href="/danh-muc/tin-tuc">Tin tức</a>
-                    </li>
-                    <li>
-                        <a href="/danh-muc/lien-he">Liên hệ</a>
-                    </li>
+                    @foreach ($navigation as $nav)
+                        <li>
+                            <a href="{{ $nav->slug_link }}">{{ $nav->name }}</a>
+                        </li>
+                    @endforeach
                 </ul>
             </div>
         </div>
     </div>
 </nav>
+@php
+    $banner = App\Banner::where([
+        'status'=> 1
+    ])->get();
+@endphp
 <section id="carousel" class="carousel slide mb-2" data-ride="carousel">
     <!-- Indicators -->
     <ul class="carousel-indicators">
-        <li data-target="#carousel" data-slide-to="0" class="active"></li>
-        <li data-target="#carousel" data-slide-to="1"></li>
-        <li data-target="#carousel" data-slide-to="2"></li>
+        @foreach ($banner as $i => $bn)
+            <li data-target="#carousel_{{ $bn->id }}" data-slide-to="0" class="{{ $i == 0 ? 'active' : '' }}"></li>
+        @endforeach
     </ul>
     <!-- The slideshow -->
     <div class="carousel-inner">
-        <div class="carousel-item active">
-            <img src="/images/banner.png" width="100%" height="500">
-        </div>
-        <div class="carousel-item">
-            <img src="/images/banner.png" width="100%" height="500">
-        </div>
-        <div class="carousel-item">
-            <img src="/images/banner.png" width="100%" height="500">
-        </div>
+        @foreach ($banner as $i => $bn)
+                <div class="carousel-item {{ $i == 0 ? 'active' : '' }}">
+                    <a target="_blank" title="{{ $bn->image }}" href="{{ $bn->link ?? '#' }}">
+                        <img src="{{ $bn->image }}" width="100%" height="500">
+                    </a>
+                </div>
+        @endforeach
     </div>
     <!-- Left and right controls -->
     <a class="carousel-control-prev" href="#carousel" data-slide="prev">

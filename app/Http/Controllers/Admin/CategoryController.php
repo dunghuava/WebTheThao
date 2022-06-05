@@ -23,33 +23,61 @@ class CategoryController extends Controller
         return view('admin.category.index', $data);
     }
 
+    public function getOptionCategories($id = 0)
+    {
+        $options = '';
+        $categories = Category::where('parent_id', 0)->get();
+        foreach ($categories as $cate) {
+            $options .= '<option ' . ($id == $cate->id ? 'selected' : '') . ' value="' . $cate->id . '">' . $cate->name . '</option>';
+            $subCate = Category::where('parent_id', $cate->id)->get();
+            foreach ($subCate as $sub) {
+                $options .= '<option ' . ($id == $sub->id ? 'selected' : '') . ' value="' . $sub->id . '">  →' . $sub->name . '</option>';
+                $subCate3 = Category::where('parent_id', $sub->id)->get();
+                foreach ($subCate3 as $sub3) {
+                    $options .= '<option ' . ($id == $sub3->id ? 'selected' : '') . ' value="' . $sub3->id . '">    →' . $sub3->name . '</option>';
+                }
+            }
+        }
+        return $options;
+    }
+
     public function add(Request $request)
     {
-        return view('admin.category.create');
+        $data = [
+            'options' => $this->getOptionCategories()
+        ];
+        return view('admin.category.create', $data);
     }
 
     public function edit(Request $request, Category $item)
     {
-        return view('admin.category.create', compact('item'));
+        $data = [
+            'item' => $item,
+            'options' => $this->getOptionCategories($item->id)
+        ];
+        return view('admin.category.create', $data);
     }
 
     public function store(Request $request)
     {
-        $data = $request->except(['_token']);
-        if (!$data['slug']) {
+        try {
+            $data = $request->except(['_token', 'slug']);
             $data['slug'] = str_slug($data['name']);
-        }
-        if (!isset($data['id'])) {
-            $category = Category::create($data);
-            return Redirect::route('admin.category.list');
-        } else {
-            if (!$data['slug']) {
-                $data['slug'] = str_slug($data['name']);
-            } else {
-                unset($data['slug']);
+            if ($dublicate = Category::where('slug', $data['slug'])->first()) {
+                $data['slug'] = $data['slug'] . '-' . rand(0, 999);
             }
-            $category = Category::where('id', $data['id'])->update($data);
-            return Redirect::route('admin.category.list');
+            if (!isset($data['id'])) {
+                $category = Category::create($data);
+                return Redirect::route('admin.category.list');
+            } else {
+                if ($data['parent_id'] == $data['id']) {
+                    unset($data['parent_id']);
+                }
+                $category = Category::where('id', $data['id'])->update($data);
+                return Redirect::route('admin.category.list');
+            }
+        } catch (\Exception $e) {
+            return Redirect::back();
         }
     }
 }

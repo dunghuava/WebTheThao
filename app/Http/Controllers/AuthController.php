@@ -27,4 +27,10 @@ class AuthController extends Controller
         }
         return view('admin.login');
     }
+
+    public function logout()
+    {
+        Auth::logout();
+        return Redirect::route('admin.login');
+    }
 }

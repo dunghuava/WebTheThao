@@ -11,9 +11,11 @@
 |
 */
 
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CartController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
+use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\AuthController;
@@ -24,6 +26,7 @@ use App\Http\Controllers\LayoutController;
 Route::get('/', [LayoutController::class, 'index']);
 
 Route::match(['GET', 'POST'], '/admin/login', [AuthController::class, 'adminLogin'])->name('admin.login');
+Route::get('/admin/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
 Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], function () {
     Route::get('/', [DashboardController::class, 'index'])->name('index');
@@ -51,6 +54,15 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
         Route::post('/store', [PostController::class, 'store'])->name('store');
         Route::get('/{item}/edit', [PostController::class, 'edit'])->name('edit');
     });
+
+    Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
+        Route::get('/', [OrderController::class, 'index'])->name('index');
+    });
+
+    Route::group(['prefix' => 'banner', 'as' => 'banner.'], function () {
+        Route::get('/', [BannerController::class, 'index'])->name('index');
+        Route::post('store', [BannerController::class, 'store'])->name('store');
+    });
 });
 
 Route::group(['prefix' => 'danh-muc'], function () {
@@ -68,5 +80,6 @@ Route::group(['prefix' => 'san-pham'], function () {
 });
 
 Route::group(['prefix' => 'gio-hang'], function () {
-    Route::get('/', [CartController::class, 'index']);
+    Route::get('/', [CartController::class, 'index'])->name('cart.index');
+    Route::post('/them', [CartController::class, 'store'])->name('cart.add');
 });

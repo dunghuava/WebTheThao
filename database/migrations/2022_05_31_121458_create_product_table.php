@@ -20,7 +20,7 @@ class CreateProductTable extends Migration
             $table->string('slug')->unique();
             $table->string('image')->nullable();
             $table->integer('category_id')->unsigned();
-            $table->tinyInteger('order_index')->default(0);
+            $table->integer('order_index')->default(0);
             $table->decimal('price')->default(0);
             $table->tinyInteger('status')->default(0)->comment('0. hide 1. active');
             $table->string('desc')->nullable();

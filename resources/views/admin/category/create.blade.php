@@ -14,39 +14,57 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label>Tên danh mục</label>
-                        <input value="{{ $item->name ?? '' }}" name="name" type="text" class="form-control">
+                        <input required value="{{ $item->name ?? '' }}" name="name" type="text" class="form-control">
                         @if(isset($item))
                             <input name="id" type="hidden" value="{{ $item->id }}"/>
                         @endif
                     </div>
+                    @if(isset($item))
                     <div class="form-group">
                         <label>Đường dẫn</label>
-                        <input value="{{ $item->slug_link ?? '' }}" name="slug" type="text" class="form-control">
+                        <p>
+                            <a target="_blank" href="{{ $item->slug_link }}">{{ $item->slug_link }}</a>
+                        </p>
+                    </div>
+                    @endif
+                    <div class="form-group">
+                        <label>Mô tả</label>
+                        <textarea name="desc" rows="10" class="form-control editor">{{ $item->desc ?? '' }}</textarea>
                     </div>
                     <div class="form-group">
-                        <label>Loại danh mục</label>
+                        <label>Loại hiển thị</label>
                         <select name="type" class="form-control">
-                            <option value="0">Bài viết</option>
+                            <option {{ ($item->type ?? 0) == 0 ? 'selected' : '' }} value="0">Bài viết</option>
+                            <option {{ ($item->type ?? 0) == 1 ? 'selected' : '' }} value="1">Sản phẩm</option>
+                            <option {{ ($item->type ?? 0) == 2 ? 'selected' : '' }} value="2">Nội dung</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Thuộc danh mục</label>
                         <select name="parent_id" class="form-control">
-                            <option value="0">--- Danh mục chính ---</option>
+                            <option value="0">Đặt làm danh mục chính</option>
+                            <?=$options?>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Trạng thái</label>
                         <select name="status" class="form-control">
-                            <option value="1">Kích hoạt</option>
-                            <option value="0">Không kích hoạt</option>
+                            <option {{ ($item->status ?? 0) == 1 ? 'selected' : '' }} value="1">Kích hoạt</option>
+                            <option {{ ($item->status ?? 0) == 0 ? 'selected' : '' }} value="0">Không kích hoạt</option>
                         </select>
                     </div>
                     <div class="form-group">
                         <label>Đặt làm menu top</label>
                         <select name="menu_top" class="form-control">
-                            <option value="1">Có</option>
-                            <option value="0">Không</option>
+                            <option {{ ($item->menu_top ?? 0) == 1 ? 'selected' : '' }} value="1">Có</option>
+                            <option {{ ($item->menu_top ?? 0) == 0 ? 'selected' : '' }} value="0">Không</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Hiển thị trang chủ</label>
+                        <select name="show_home" class="form-control">
+                            <option {{ ($item->show_home ?? 0) == 1 ? 'selected' : '' }} value="1">Có</option>
+                            <option {{ ($item->show_home ?? 0) == 0 ? 'selected' : '' }} value="0">Không</option>
                         </select>
                     </div>
                     <div class="form-group">

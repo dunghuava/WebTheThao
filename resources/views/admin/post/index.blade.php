@@ -16,18 +16,19 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
-                      <th>Tên danh mục</th>
+                      <th>Tên bài viết</th>
                       <th>Loại</th>
-                      <th>Thuộc danh mục</th>
-                      <th>Menu top</th>
+                      <th>Mô tả</th>
+                      <th>Hình ảnh</th>
+                      <th>Trạng thái</th>
                       <th width="10%">Thao tác</th>
                     </tr>
                   </thead>
                   <tbody>
                       @foreach ($post as $index => $item)
                         <tr>
-                            <td>1.</td>
-                            <td>
+                            <td class="align-middle">{{ $index + 1 }}</td>
+                            <td class="align-middle">
                                 {{ $item->name }}
                                 @if(!empty($item->slug))
                                     <p>
@@ -35,12 +36,26 @@
                                     </p>
                                 @endif
                             </td>
-                            <td>{{ $item->type_label }}</td>
-                            <td>{{ $item->parent_label }}</td>
-                            <td>{{ $item->menu_label }}</td>
-                            <td>
-                                <a href="{{ route('admin.category.edit',$item->id) }}" class="btn btn-sm btn-success">Sửa</a>
-                                <a href="{{ route('admin.category.delete') }}" class="btn btn-sm btn-danger">Xóa</a>
+                            <td class="align-middle">
+                                @php
+                                    if($item->category_id > 0) {
+                                        $parent = App\Category::find($item->category_id);
+                                        if($parent){
+                                            echo $parent->name;
+                                        }
+                                    }
+                                @endphp
+                            </td>
+                            <td class="align-middle">{{ $item->desc }}</td>
+                            <td class="align-middle">
+                                <img width="55" src="{{ $item->image }}"/>
+                            </td>
+                            <td class="align-middle">
+                                <input {{ $item->status ? 'checked':'' }} type="checkbox"/>
+                            </td>
+                            <td class="align-middle">
+                                <a href="{{ route('admin.post.edit',$item->id) }}" class="btn btn-sm btn-success">Sửa</a>
+                                <a href="{{ route('admin.post.delete') }}" class="btn btn-sm btn-danger">Xóa</a>
                             </td>
                         </tr>
                       @endforeach

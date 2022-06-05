@@ -17,10 +17,12 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->text('desc')->nullable();
             $table->string('slug')->unique();
-            $table->tinyInteger('order_index')->default(0);
+            $table->integer('order_index')->default(0);
             $table->tinyInteger('parent_id')->default(0);
             $table->tinyInteger('status')->default(0)->comment('0. hide 1. active');
+            $table->tinyInteger('show_home')->default(0)->comment('0. hide 1. active');
             $table->tinyInteger('menu_top')->default(0);
             $table->tinyInteger('type')->default(0)->comment('0. post 1. product 2. single page 3. about');
             $table->timestamps();

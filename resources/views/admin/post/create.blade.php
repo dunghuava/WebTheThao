@@ -9,7 +9,7 @@
               <div class="card-header">
                 <h3 class="card-title">Thêm / Sửa bài viết</h3>
               </div>
-              <form method="POST" action="{{ route('admin.category.store') }}">
+              <form method="POST" action="{{ route('admin.post.store') }}" enctype="multipart/form-data" >
                 @csrf
                 <div class="card-body">
                     <div class="form-group">
@@ -19,29 +19,41 @@
                             <input name="id" type="hidden" value="{{ $item->id }}"/>
                         @endif
                     </div>
+                    @if(isset($item))
                     <div class="form-group">
                         <label>Đường dẫn</label>
-                        <input value="{{ $item->slug_link ?? '' }}" name="slug" type="text" class="form-control">
+                        <p>
+                            <a target="_blank" href="{{ $item->slug_link }}">{{ $item->slug_link }}</a>
+                        </p>
                     </div>
+                    @endif
                     <div class="form-group">
                         <label>Loại bài viết</label>
-                        <select name="type" class="form-control">
-                            <option value="0">Bài viết</option>
+                        <select name="category_id" class="form-control">
+                            <option value="0">Chọn loại bài viết</option>
+                            <?=$options?>
                         </select>
                     </div>
                     <div class="form-group">
+                        <label>Hình ảnh</label><br/>
+                        <input name="image" type="file" class="form-control-x mb-2"><br/>
+                        @if(isset($item) && !empty($item->image))
+                            <img width="100" src="{{ $item->image }}"/>
+                        @endif
+                    </div>
+                    <div class="form-group">
                         <label>Mô tả bài viết</label>
-                        <textarea class="form-control"></textarea>
+                        <textarea name="desc" class="form-control">{{ $item->desc ?? '' }}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Chi tiết bài viết</label>
-                        <textarea rows="10" class="form-control editor"></textarea>
+                        <textarea name="content" rows="10" class="form-control editor">{{ $item->content ?? '' }}</textarea>
                     </div>
                     <div class="form-group">
                         <label>Trạng thái</label>
                         <select name="status" class="form-control">
-                            <option value="1">Kích hoạt</option>
-                            <option value="0">Không kích hoạt</option>
+                            <option {{ ($item->status ?? 0) == 1 ? 'selected' : '' }} value="1">Kích hoạt</option>
+                            <option {{ ($item->status ?? 0) == 0 ? 'selected' : '' }} value="0">Không kích hoạt</option>
                         </select>
                     </div>
                     <div class="form-group">
@@ -50,7 +62,7 @@
                     </div>
                 </div>
                 <div class="card-footer">
-                    <a href="{{ route('admin.category.list') }}" class="btn btn-danger">Hủy bỏ</a>
+                    <a href="{{ route('admin.post.list') }}" class="btn btn-danger">Hủy bỏ</a>
                     <button type="submit" class="btn btn-primary">Lưu lại</button>
                 </div>
               </form>

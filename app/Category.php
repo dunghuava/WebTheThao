@@ -9,9 +9,9 @@ class Category extends Model
 {
     protected $table = 'categories';
 
-    protected $fillable = ['name', 'slug', 'type', 'parent_id', 'status', 'menu_top', 'order_index'];
+    protected $fillable = ['name', 'slug', 'type', 'parent_id', 'status', 'menu_top', 'order_index', 'desc', 'show_home'];
 
-    protected $append = ['slug_link'];
+    protected $appends  = ['slug_link'];
 
     protected function getSlugLinkAttribute()
     {

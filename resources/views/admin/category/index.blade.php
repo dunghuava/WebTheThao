@@ -19,14 +19,16 @@
                       <th>Tên danh mục</th>
                       <th>Loại</th>
                       <th>Thuộc danh mục</th>
-                      <th>Menu top</th>
+                      <th class="text-center">Menu top</th>
+                      <th class="text-center">Trang chủ</th>
+                      <th class="text-center">Trạng thái</th>
                       <th width="10%">Thao tác</th>
                     </tr>
                   </thead>
                   <tbody>
                       @foreach ($category as $index => $item)
                         <tr>
-                            <td>1.</td>
+                            <td class="align-middle">{{ $index + 1 }}</td>
                             <td>
                                 {{ $item->name }}
                                 @if(!empty($item->slug))
@@ -35,10 +37,40 @@
                                     </p>
                                 @endif
                             </td>
-                            <td>{{ $item->type_label }}</td>
-                            <td>{{ $item->parent_label }}</td>
-                            <td>{{ $item->menu_label }}</td>
-                            <td>
+                            <td class="align-middle">
+                                @switch($item->type)
+                                    @case(0)
+                                        {{ 'Bài viết' }}
+                                        @break
+                                    @case(1)
+                                        {{ 'Sản phẩm' }}
+                                        @break
+                                    @case(2)
+                                        {{ 'Nội dung' }}
+                                        @break
+                                    @default
+                                @endswitch
+                            </td>
+                            <td class="align-middle">
+                                @php
+                                    if($item->parent_id > 0) {
+                                        $parent = App\Category::find($item->parent_id);
+                                        if($parent){
+                                            echo $parent->name;
+                                        }
+                                    }
+                                @endphp
+                            </td>
+                            <td align="center" class="align-middle">
+                                <input {{ $item->menu_top ? 'checked':'' }} type="checkbox"/>
+                            </td>
+                            <td align="center" class="align-middle">
+                                <input {{ $item->show_home ? 'checked':'' }} type="checkbox"/>
+                            </td>
+                            <td align="center" class="align-middle">
+                                <input {{ $item->status ? 'checked':'' }} type="checkbox"/>
+                            </td>
+                            <td class="align-middle">
                                 <a href="{{ route('admin.category.edit',$item->id) }}" class="btn btn-sm btn-success">Sửa</a>
                                 <a href="{{ route('admin.category.delete') }}" class="btn btn-sm btn-danger">Xóa</a>
                             </td>
