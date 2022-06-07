@@ -43,14 +43,15 @@
             @endphp
             @foreach($product as $item)
                 <div class="col-lg-3">
-                    <div class="product-item mb-3">
-                        <div class="img">
-                            <img src="{{ $item->image }}"/>
+                    <a href="{{ $item->slug_link }}" class="btn btn-sm btn-default">
+                        <div class="product-item mb-3">
+                            <div class="img">
+                                <img height="250" src="{{ $item->image }}"/>
+                            </div>
+                            <p>{{ $item->name }}</p>
+                            <p class="text-danger font-weight-bold">{{ number_format($item->price) }} đ</p>
                         </div>
-                        <p>{{ $item->name }}</p>
-                        <p class="text-danger font-weight-bold">{{ number_format($item->price) }} đ</p>
-                        <a href="{{ $item->slug_link }}" class="btn btn-sm btn-success">Đặt mua</a>
-                    </div>
+                    </a>
                 </div>
             @endforeach
         </div>
@@ -59,7 +60,7 @@
 
     @php
         $bigItem = App\Post::orderBy('id','desc')->first();
-        $smallItem = App\Post::orderBy('id','desc')->where('id','<>',$bigItem->id)->limit(4)->get();
+        $smallItem = App\Post::orderBy('id','desc')->where('id','<>',$bigItem->id ?? 0)->limit(4)->get();
     @endphp
     @if($bigItem)
     <section class="container">
@@ -72,7 +73,7 @@
             <div class="col-lg-8">
                 <div class="item-new big">
                     <a href="{{ $bigItem->slug_link }}">
-                        <img class="mb-2" src="{{ $bigItem->image }}"/>
+                        <img height="420" class="mb-2" src="{{ $bigItem->image }}"/>
                         <h5>{{ $bigItem->name }}</h5>
                         <p>{{ substr($bigItem->desc,0,254) }}</p>
                     </a>
@@ -80,9 +81,9 @@
             </div>
             <div class="col-lg-4">
                 @foreach ($smallItem as $n)
-                <div class="item-new small">
+                <div class="item-new small btn btn-default p-0">
                     <a href="{{ $n->slug_link }}">
-                        <img class="mb-2" src="{{ $n->image }}"/>
+                        <img height="100" class="mb-2" src="{{ $n->image }}"/>
                         <p>{{ $n->name }}</p>
                     </a>
                 </div>

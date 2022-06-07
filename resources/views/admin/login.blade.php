@@ -13,20 +13,24 @@
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-5">
-                    <form method="POST">
-                        <br/><br/>
-                        @csrf
-                        <h3>Admin login</h3>
-                        <div class="form-group">
-                            <label>Email address</label>
-                            <input required name="email" type="email" class="form-control" placeholder="Enter email">
+                    <div class="card mt-5">
+                        <div class="card-body">
+                            <form method="POST">
+                                <br/>
+                                @csrf
+                                <h3>Admin login</h3>
+                                <div class="form-group">
+                                    <label>Email address</label>
+                                    <input required name="email" type="email" class="form-control" placeholder="Enter email">
+                                </div>
+                                <div class="form-group">
+                                    <label>Password</label>
+                                    <input required name="password" type="password" class="form-control" placeholder="Password">
+                                </div>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
                         </div>
-                        <div class="form-group">
-                            <label>Password</label>
-                            <input required name="password" type="password" class="form-control" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
+                    </div>
                 </div>
             </div>
         </div>

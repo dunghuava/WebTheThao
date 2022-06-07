@@ -28,11 +28,17 @@ class PostController extends Controller
 
     public function detail(Request $request, $alias = null)
     {
+        $item = Post::where([
+            'status' => 1,
+            'slug' => $alias
+        ])->first();
+
+        if (!$item) {
+            return Redirect::to('/');
+        }
+
         $data = [
-            'item' => Post::where([
-                'status' => 1,
-                'slug' => $alias
-            ])->first()
+            'item' => $item
         ];
         return view('web.new-detail', $data);
     }

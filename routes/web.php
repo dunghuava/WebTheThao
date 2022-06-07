@@ -62,6 +62,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
     Route::group(['prefix' => 'banner', 'as' => 'banner.'], function () {
         Route::get('/', [BannerController::class, 'index'])->name('index');
         Route::post('store', [BannerController::class, 'store'])->name('store');
+        Route::post('{id}/edit', [BannerController::class, 'edit'])->name('edit');
     });
 });
 

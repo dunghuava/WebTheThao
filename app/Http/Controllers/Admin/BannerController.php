@@ -12,16 +12,26 @@ class BannerController extends Controller
 {
     public function index()
     {
+        $item = null;
+        if (request()->get('edit')) {
+            $item = Banner::find(request()->get('edit', 0));
+        }
         $data = [
+            'item' => $item,
             'banner' => Banner::all()
         ];
         return view('admin.banner.index', $data);
     }
 
+    public function edit(Banner $item)
+    {
+    }
+
     public function store(Request $request)
     {
         try {
-            $data = $request->except(['_token']);
+            $data = $request->all();
+            $data['status'] = $request->get('status', 0);
             $image = $request->file('image');
             if ($image) {
                 $path = storage_path('app/public/image');
@@ -29,7 +39,9 @@ class BannerController extends Controller
                     $data['image'] = URL::asset('/storage/image/' . $image->getClientOriginalName());
                 }
             }
-            $banner = Banner::create($data);
+            Banner::updateOrCreate([
+                'id' => $request->get('id', 0)
+            ], $data);
             return Redirect::route('admin.banner.index');
         } catch (\Exception $e) {
             return Redirect::back();

@@ -11,14 +11,14 @@
                 </ol>
             </nav>
         </div>
-        <div class="col-lg-9">
+        <div class="col-lg-12">
             <div class="row">
-                <div class="col-lg-7">
+                <div class="col-lg-5">
                     <div class="img">
                         <img src="{{ $item->image }}" />
                     </div>
                 </div>
-                <div class="col-lg-5">
+                <div class="col-lg-7">
                     <form method="POST" action="{{ route('cart.add') }}">
                         @csrf
                         <h4>{{ $item->name }}</h4>
@@ -56,15 +56,29 @@
                 </div>
             </div>
         </div>
-        <div class="col-lg-3">
-            <ul class="list-group">
-                <li class="list-group-item">Menu</li>
-                <li class="list-group-item">Menu</li>
-                <li class="list-group-item">Menu</li>
-                <li class="list-group-item">Menu</li>
-                <li class="list-group-item">Menu</li>
-            </ul>
+    </div>
+    @php
+    $products = App\Product::where('category_id',$item->category_id)->get();
+    @endphp
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box-title">
+                <h3>Sản phẩm liên quan</h3>
+            </div>
         </div>
+        @foreach($products as $prod)
+        <div class="col-lg-3">
+            <a href="{{ $prod->slug_link }}" class="btn btn-sm btn-default mb-3">
+                <div class="product-item mb-3">
+                    <div class="img">
+                        <img height="250" src="{{ $prod->image }}" />
+                    </div>
+                    <p>{{ $prod->name }}</p>
+                    <p class="text-danger font-weight-bold">{{ number_format($prod->price) }} đ</p>
+                </div>
+            </a>
+        </div>
+        @endforeach
     </div>
 </section>
 @endsection

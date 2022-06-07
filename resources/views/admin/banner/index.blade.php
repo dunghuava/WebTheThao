@@ -17,7 +17,10 @@
                 <div class="modal-body">
                         <div class="form-group">
                             <label>Tên banner</label>
-                            <input required type="text" name="name" class="form-control"/>
+                            @if($item)
+                                <input type="hidden" name="id" value="{{ $item->id }}"/>
+                            @endif
+                            <input required value="{{ $item->name ?? '' }}" type="text" name="name" class="form-control"/>
                         </div>
                         <div class="form-group">
                             <label>Hình ảnh</label><br/>
@@ -25,11 +28,11 @@
                         </div>
                         <div class="form-group">
                             <label>Liên kết URL</label>
-                            <input type="text" name="link" class="form-control"/>
+                            <input value="{{ $item->link ?? '' }}" type="text" name="link" class="form-control"/>
                         </div>
                         <div class="form-group">
                             <label>Trạng thái</label><br/>
-                            <input type="checkbox" name="status" value="1" class="form-control-x"/>
+                            <input type="checkbox" {{ ($item->status ?? 0) ? 'checked':'' }} name="status" value="1" class="form-control-x"/>
                         </div>
                 </div>
                 <div class="modal-footer">
@@ -40,6 +43,11 @@
         </div>
         </form>
     </div>
+    @if($item)
+        <script>
+            $('#exampleModal').modal('show');
+        </script>
+    @endif
     <div class="container-fluid">
         <div class="row">
             <div class="col-lg-12">
@@ -57,7 +65,7 @@
                       <th>Tên banner</th>
                       <th>Hình ảnh</th>
                       <th>Liên kết</th>
-                      <th>Trạng thái</th>
+                      <th class="text-center">Trạng thái</th>
                       <th width="10%">Thao tác</th>
                     </tr>
                   </thead>
@@ -76,11 +84,11 @@
                                     <a target="_blank" href="{{ $item->link }}">{{ $item->link }}</a>
                                 </p>
                             </td>
-                            <td class="align-middle">
+                            <td align="center" class="align-middle">
                                 <input {{ $item->status ? 'checked':'' }} type="checkbox"/>
                             </td>
                             <td class="align-middle">
-                                <a href="{{ route('admin.category.edit',$item->id) }}" class="btn btn-sm btn-success">Sửa</a>
+                                <a href="{{ route('admin.banner.index').'?edit='.$item->id }}" class="btn btn-sm btn-success">Sửa</a>
                                 <a href="{{ route('admin.category.delete') }}" class="btn btn-sm btn-danger">Xóa</a>
                             </td>
                         </tr>

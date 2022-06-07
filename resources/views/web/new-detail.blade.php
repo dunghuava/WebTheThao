@@ -23,6 +23,27 @@
                     @endphp
                 </div>
             </div>
+            @php
+               $news = App\Post::where('category_id',$item->category_id)->get();
+            @endphp
+            <div class="col-lg-12">
+                <div class="box-title">
+                    <h3>Tin tức liên quan</h3>
+                </div>
+            </div>
+            @foreach ($news as $new)
+                <div class="col-lg-4">
+                    <a href="{{ $new->slug_link }}">
+                        <div class="item-new mb-3 btn btn-default">
+                            <div class="img">
+                                <img height="220" src="{{ $new->image }}"/>
+                            </div>
+                            <p class="mb-0">{{ $new->name }}</p>
+                            <small>{{ $new->created_at->format('d/m/Y H:i') }}</small>
+                        </div>
+                    </a>
+                </div>
+            @endforeach
         </div>
     </section>
 @endsection

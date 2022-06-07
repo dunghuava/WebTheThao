@@ -5,15 +5,39 @@ namespace App\Http\Controllers\Admin;
 use App\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Post;
 use App\Product;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Route;
 
 class CategoryController extends Controller
 {
-    public function index()
+    public function index($alias = null)
     {
-        return view('web.category');
+        $cate = Category::where([
+            'status' => 1,
+            'slug' => $alias
+        ])->first();
+
+        if (!$cate) {
+            return Redirect::to('/');
+        }
+        $type = 'post';
+        switch ($cate->type) {
+            case 0:
+                $type = 'post';
+                $items = Post::where('category_id', $cate->id)->get();
+                break;
+            case 1:
+                $type = 'product';
+                $items = Product::where('category_id', $cate->id)->get();
+                break;
+        }
+        $data = [
+            'type' => $type,
+            'items' => $items
+        ];
+        return view('web.category', $data);
     }
     public function list(Request $request)
     {
