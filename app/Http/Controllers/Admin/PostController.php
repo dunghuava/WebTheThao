@@ -95,4 +95,10 @@ class PostController extends Controller
             return Redirect::back();
         }
     }
+
+    public function delete(Post $id)
+    {
+        $id->delete();
+        return Redirect::back();
+    }
 }

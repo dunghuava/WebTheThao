@@ -108,4 +108,17 @@ class CategoryController extends Controller
             return Redirect::back();
         }
     }
+
+    public function delete(Category $id)
+    {
+        $id->delete();
+        return Redirect::back();
+    }
+
+    public function updateIndex(Request $request, Category $id)
+    {
+        $id->order_index = $request->order_index;
+        $id->save();
+        return Redirect::back();
+    }
 }

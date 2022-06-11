@@ -3,7 +3,7 @@
         'menu_top'=>1,
         'status'=>1,
         'parent_id'=>0
-    ])->get();
+    ])->orderBy('order_index','asc')->get();
 @endphp
 
 <nav class="top-nav pt-4 pb-2">

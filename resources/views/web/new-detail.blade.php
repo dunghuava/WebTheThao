@@ -24,7 +24,7 @@
                 </div>
             </div>
             @php
-               $news = App\Post::where('category_id',$item->category_id)->get();
+               $news = App\Post::where('category_id',$item->category_id)->limit(6)->get();
             @endphp
             <div class="col-lg-12">
                 <div class="box-title">

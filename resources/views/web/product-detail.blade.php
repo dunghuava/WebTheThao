@@ -58,7 +58,7 @@
         </div>
     </div>
     @php
-    $products = App\Product::where('category_id',$item->category_id)->get();
+    $products = App\Product::where('category_id',$item->category_id)->limit(6)->get();
     @endphp
     <div class="row">
         <div class="col-lg-12">

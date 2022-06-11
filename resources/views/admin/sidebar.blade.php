@@ -106,7 +106,7 @@
             </a>
           </li>
           <li class="nav-item {{ strpos($currentRouteName,'admin.setting') !== false ? 'menu-is-opening menu-open':'' }}">
-            <a href="#" class="nav-link">
+            <a href="{{ route('admin.setting.index') }}" class="nav-link">
               <i class="nav-icon fas fa-cog"></i>
               <p>
                 Cài đặt

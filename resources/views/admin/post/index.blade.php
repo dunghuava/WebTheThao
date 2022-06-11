@@ -55,7 +55,7 @@
                             </td>
                             <td class="align-middle">
                                 <a href="{{ route('admin.post.edit',$item->id) }}" class="btn btn-sm btn-success">Sửa</a>
-                                <a href="{{ route('admin.post.delete') }}" class="btn btn-sm btn-danger">Xóa</a>
+                                <a onclick="return confirm('Bạn có muốn xóa mục này ?')" href="{{ route('admin.post.delete',$item->id) }}" class="btn btn-sm btn-danger">Xóa</a>
                             </td>
                         </tr>
                       @endforeach

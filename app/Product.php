@@ -9,7 +9,7 @@ class Product extends Model
 {
     protected $table = 'product';
 
-    protected $fillable = ['name', 'slug', 'price', 'category_id', 'status', 'order_index', 'content', 'desc'];
+    protected $fillable = ['name', 'slug', 'price', 'category_id', 'status', 'order_index', 'content', 'desc','image'];
 
     protected $append = ['slug_link'];
 

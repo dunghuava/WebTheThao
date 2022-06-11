@@ -47,4 +47,10 @@ class BannerController extends Controller
             return Redirect::back();
         }
     }
+
+    public function delete(Banner $id)
+    {
+        $id->delete();
+        return Redirect::back();
+    }
 }

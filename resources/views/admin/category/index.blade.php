@@ -16,6 +16,7 @@
                   <thead>
                     <tr>
                       <th style="width: 10px">#</th>
+                      <th>Sắp xếp</th>
                       <th>Tên danh mục</th>
                       <th>Loại</th>
                       <th>Thuộc danh mục</th>
@@ -29,6 +30,12 @@
                       @foreach ($category as $index => $item)
                         <tr>
                             <td class="align-middle">{{ $index + 1 }}</td>
+                            <td class="align-middle">
+                                <form method="POST" action="{{ route('admin.category.update_index',$item->id) }}">
+                                     @csrf
+                                    <input name="order_index" class="form-control" style="width:100px" type="number" value="{{ $item->order_index }}"/>
+                                </form>
+                            </td>
                             <td>
                                 {{ $item->name }}
                                 @if(!empty($item->slug))
@@ -72,7 +79,7 @@
                             </td>
                             <td class="align-middle">
                                 <a href="{{ route('admin.category.edit',$item->id) }}" class="btn btn-sm btn-success">Sửa</a>
-                                <a href="{{ route('admin.category.delete') }}" class="btn btn-sm btn-danger">Xóa</a>
+                                <a onclick="return confirm('Bạn có muốn xóa mục này ?')" href="{{ route('admin.category.delete',$item->id) }}" class="btn btn-sm btn-danger">Xóa</a>
                             </td>
                         </tr>
                       @endforeach

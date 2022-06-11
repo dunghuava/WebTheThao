@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PostController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LayoutController;
@@ -34,15 +35,16 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
     Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
         Route::get('/', [CategoryController::class, 'list'])->name('list');
         Route::get('/add', [CategoryController::class, 'add'])->name('add');
-        Route::post('/delete', [CategoryController::class, 'delete'])->name('delete');
+        Route::get('/{id}/delete', [CategoryController::class, 'delete'])->name('delete');
         Route::post('/store', [CategoryController::class, 'store'])->name('store');
+        Route::post('{id}/update-index', [CategoryController::class, 'updateIndex'])->name('update_index');
         Route::get('/{item}/edit', [CategoryController::class, 'edit'])->name('edit');
     });
 
     Route::group(['prefix' => 'product', 'as' => 'product.'], function () {
         Route::get('/', [ProductController::class, 'list'])->name('list');
         Route::get('/add', [ProductController::class, 'add'])->name('add');
-        Route::post('/delete', [ProductController::class, 'delete'])->name('delete');
+        Route::get('{id}/delete', [ProductController::class, 'delete'])->name('delete');
         Route::post('/store', [ProductController::class, 'store'])->name('store');
         Route::get('/{item}/edit', [ProductController::class, 'edit'])->name('edit');
     });
@@ -50,7 +52,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
     Route::group(['prefix' => 'post', 'as' => 'post.'], function () {
         Route::get('/', [PostController::class, 'list'])->name('list');
         Route::get('/add', [PostController::class, 'add'])->name('add');
-        Route::post('/delete', [PostController::class, 'delete'])->name('delete');
+        Route::get('{id}/delete', [PostController::class, 'delete'])->name('delete');
         Route::post('/store', [PostController::class, 'store'])->name('store');
         Route::get('/{item}/edit', [PostController::class, 'edit'])->name('edit');
     });
@@ -63,6 +65,12 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
         Route::get('/', [BannerController::class, 'index'])->name('index');
         Route::post('store', [BannerController::class, 'store'])->name('store');
         Route::post('{id}/edit', [BannerController::class, 'edit'])->name('edit');
+        Route::get('{id}/delete', [BannerController::class, 'delete'])->name('delete');
+    });
+
+    Route::group(['prefix' => 'setting', 'as' => 'setting.'], function () {
+        Route::get('/', [SettingController::class, 'index'])->name('index');
+        Route::post('/store', [SettingController::class, 'store'])->name('store');
     });
 });
 
