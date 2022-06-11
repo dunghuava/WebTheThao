@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label>Tên sản phẩm</label>
-                        <input value="{{ $item->name ?? '' }}" name="name" type="text" class="form-control">
+                        <input required value="{{ $item->name ?? '' }}" name="name" type="text" class="form-control">
                         @if(isset($item))
                             <input name="id" type="hidden" value="{{ $item->id }}"/>
                         @endif
@@ -29,8 +29,8 @@
                     @endif
                     <div class="form-group">
                         <label>Loại sản phẩm</label>
-                        <select name="category_id" class="form-control">
-                            <option value="0">Chọn loại sản phẩm</option>
+                        <select required name="category_id" class="form-control">
+                            <option value="">Chọn loại sản phẩm</option>
                             <?=$options?>
                         </select>
                     </div>

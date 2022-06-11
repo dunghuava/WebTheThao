@@ -40,6 +40,16 @@
                     @foreach ($navigation as $nav)
                         <li>
                             <a href="{{ $nav->slug_link }}">{{ $nav->name }}</a>
+                            @php
+                                $subs = App\Category::where('parent_id',$nav->id)->get();
+                            @endphp
+                            <ul class="sub-menu">
+                                @foreach ($subs as $sub)
+                                    <li>
+                                        <a href="{{ $sub->slug_link }}">{{ $sub->name }}</a>
+                                    </li>
+                                @endforeach
+                            </ul>
                         </li>
                     @endforeach
                 </ul>

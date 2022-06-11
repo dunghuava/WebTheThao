@@ -46,5 +46,14 @@
                 @endforeach
             </div>
         @endif
+        @if($type == 'page')
+            <div class="row">
+              <div class="col-lg-12">
+                   @php
+                        echo $items->desc
+                   @endphp
+              </div>
+            </div>
+        @endif
     </section>
 @endsection

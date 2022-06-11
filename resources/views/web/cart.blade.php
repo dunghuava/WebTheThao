@@ -47,22 +47,27 @@
               </table>
         </div>
         <div class="col-lg-4">
-            <form>
+            <form method="POST" action="{{ route('cart.submit') }}">
+                @csrf
                 <div class="form-group">
                   <label for="formGroupExampleInput">Họ tên</label>
-                  <input required type="text" class="form-control">
+                  <input name="name" required type="text" class="form-control">
                 </div>
                 <div class="form-group">
                   <label for="formGroupExampleInput2">Địa chỉ</label>
-                  <input required type="text" class="form-control">
+                  <input name="address" required type="text" class="form-control">
+                </div>
+                <div class="form-group">
+                    <label for="formGroupExampleInput2">Email</label>
+                    <input name="email" required type="email" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput2">Số ĐT</label>
-                    <input required type="text" class="form-control">
+                    <input name="phone" required type="text" class="form-control">
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput2">Ghi chú</label>
-                    <input type="text" class="form-control">
+                    <textarea name="note" type="text" class="form-control"></textarea>
                 </div>
                 <button type="submit" class="btn btn-danger btn-sm">Đặt hàng</button>
               </form>

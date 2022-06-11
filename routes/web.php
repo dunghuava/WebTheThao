@@ -83,4 +83,6 @@ Route::group(['prefix' => 'san-pham'], function () {
 Route::group(['prefix' => 'gio-hang'], function () {
     Route::get('/', [CartController::class, 'index'])->name('cart.index');
     Route::post('/them', [CartController::class, 'store'])->name('cart.add');
+    Route::post('/luu', [CartController::class, 'submit'])->name('cart.submit');
+    Route::get('/success', [CartController::class, 'success'])->name('cart.success');
 });

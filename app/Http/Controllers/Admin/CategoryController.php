@@ -32,6 +32,10 @@ class CategoryController extends Controller
                 $type = 'product';
                 $items = Product::where('category_id', $cate->id)->get();
                 break;
+            case 2:
+                $type = 'page';
+                $items = Category::find($cate->id);
+                break;
         }
         $data = [
             'type' => $type,

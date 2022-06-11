@@ -11006,6 +11006,9 @@ a {
   list-style: none;
   display: inline-block;
   padding: 10px 8px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.5s;
+  position: relative;
 }
 
 .top-nav ul.menu-top li a {
@@ -11013,6 +11016,35 @@ a {
   text-decoration: none;
   text-transform: uppercase;
   font-weight: bold;
+}
+
+.top-nav ul.menu-top li ul.sub-menu {
+  position: absolute;
+  top: 101%;
+  left: 0px;
+  z-index: 999;
+  background: #fff;
+  margin: 0px;
+  padding: 0px;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  border: 1px solid #dcdcdc;
+  display: none;
+}
+
+.top-nav ul.menu-top li ul.sub-menu li {
+  display: block;
+  text-align: left;
+  border-bottom: 1px #dcdcdc;
+}
+
+.top-nav ul.menu-top li:hover {
+  border-bottom: 2px solid red;
+}
+
+.top-nav ul.menu-top li:hover ul.sub-menu {
+  display: block;
 }
 
 .carousel img {

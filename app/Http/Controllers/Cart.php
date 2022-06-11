@@ -51,6 +51,11 @@ class Cart extends Controller
         return count($this->cart);
     }
 
+    public function clear()
+    {
+        Session::forget('cart');
+    }
+
     private function exist($product_id = 0)
     {
         return isset($this->cart[$product_id]);

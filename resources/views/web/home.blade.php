@@ -84,7 +84,7 @@
                 <div class="item-new small btn btn-default p-0">
                     <a href="{{ $n->slug_link }}">
                         <img height="100" class="mb-2" src="{{ $n->image }}"/>
-                        <p>{{ $n->name }}</p>
+                        <p>{{ substr($n->name,0,100) }}</p>
                     </a>
                 </div>
                 @endforeach
