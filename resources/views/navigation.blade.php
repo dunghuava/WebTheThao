@@ -11,7 +11,7 @@
         <div class="row">
             <div class="col-lg-3">
                 <a href="/">
-                    <img height="80px" src="/images/logo.png"/>
+                    <img height="80px" src="{{ $setting->logo ?? '' }}"/>
                 </a>
             </div>
             <div class="col-lg-9">
