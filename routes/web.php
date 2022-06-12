@@ -59,6 +59,7 @@ Route::group(['prefix' => 'admin', 'middleware' => 'admin', 'as' => 'admin.'], f
 
     Route::group(['prefix' => 'order', 'as' => 'order.'], function () {
         Route::get('/', [OrderController::class, 'index'])->name('index');
+        Route::post('{id}/update', [OrderController::class, 'update'])->name('update');
     });
 
     Route::group(['prefix' => 'banner', 'as' => 'banner.'], function () {

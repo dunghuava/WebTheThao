@@ -20,7 +20,7 @@
                       <th>Email / Số ĐT</th>
                       <th class="text-center">Thanh toán</th>
                       <th class="text-center">Trạng thái</th>
-                      <th width="10%">Thao tác</th>
+                      <th width="5%"></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -36,17 +36,19 @@
                                 {{ $item->cast ? 'Đã thanh toán' : 'Chưa thanh toán' }}
                             </td>
                             <td align="center" class="align-middle">
-                                <select style="width:200px" class="form-control">
-                                    <option {{ $item->status == 0 ? 'selected':'' }} value="0">Đang chờ</option>
-                                    <option {{ $item->status == 1 ? 'selected':'' }} value="1">Đang xử lý</option>
-                                    <option {{ $item->status == 2 ? 'selected':'' }} value="2">Đang giao</option>
-                                    <option {{ $item->status == 3 ? 'selected':'' }} value="3">Giao thành công</option>
-                                    <option {{ $item->status == 4 ? 'selected':'' }} value="3">Đã hủy</option>
-                                </select>
+                                <form method="POST" action="{{ route('admin.order.update',$item->id) }}">
+                                    @csrf
+                                    <select name="status" style="width:200px" class="form-control status-select">
+                                        <option {{ $item->status == 0 ? 'selected':'' }} value="0">Đang chờ</option>
+                                        <option {{ $item->status == 1 ? 'selected':'' }} value="1" class="text-warning">Đang xử lý</option>
+                                        <option {{ $item->status == 2 ? 'selected':'' }} value="2" class="text-warning">Đang giao</option>
+                                        <option {{ $item->status == 3 ? 'selected':'' }} value="3" class="text-success">Giao thành công</option>
+                                        <option {{ $item->status == 4 ? 'selected':'' }} value="4" class="text-danger">Đã hủy</option>
+                                    </select>
+                                </form>
                             </td>
                             <td class="align-middle">
                                 <a data-toggle="collapse" href="#collapse_{{ $index }}" role="button" aria-expanded="false" aria-controls="collapse_{{ $index }}" class="btn btn-sm btn-success">Xem</a>
-                                <a href="{{ route('admin.category.delete') }}" class="btn btn-sm btn-danger">Xóa</a>
                             </td>
                         </tr>
                         <tr class="collapse" id="collapse_{{ $index }}">
@@ -87,4 +89,9 @@
             </div>
         </div>
     </div>
+    <script>
+        $('.status-select').change(function(){
+            $(this).parent('form').submit();
+        });
+    </script>
 @endsection

@@ -11015,7 +11015,7 @@ a {
   color: #000;
   text-decoration: none;
   text-transform: uppercase;
-  font-weight: bold;
+  font-weight: normal;
 }
 
 .top-nav ul.menu-top li ul.sub-menu {
